@@ -1,6 +1,6 @@
 {
   "name": "gendiff58k",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "bin": {
@@ -44,6 +44,7 @@
     "jest-cli": "^24.9.0"
   },
   "dependencies": {
-    "commander": "^3.0.2"
+    "commander": "^3.0.2",
+    "lodash": "^4.17.15"
   }
 }
