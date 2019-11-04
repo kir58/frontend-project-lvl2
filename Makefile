@@ -22,3 +22,6 @@ publish:
 	npm publish
 
 .PHONY: test
+
+test-coverage:
+	npm test -- --coverage
