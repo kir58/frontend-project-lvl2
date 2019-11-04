@@ -3,4 +3,5 @@
 dist
 .tern-port
 .idea
+coverage
 .DS_Store
