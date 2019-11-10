@@ -1,6 +1,6 @@
 {
   "name": "gendiff58k",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "bin": {
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "commander": "^3.0.2",
+    "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "path": "^0.12.7"
   }
