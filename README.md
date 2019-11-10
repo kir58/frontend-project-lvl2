@@ -8,3 +8,6 @@ gendiff file1.json file2.json:
 
 gendiff file1.yaml file2.yaml:
 [![asciicast](https://asciinema.org/a/280314.png)](https://asciinema.org/a/280314)
+
+gendiff file1.ini file2.ini:
+[![asciicast](https://asciinema.org/a/280345.png)](https://asciinema.org/a/280345)
