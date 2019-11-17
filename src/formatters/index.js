@@ -7,6 +7,4 @@ const renders = {
   json: JSON.stringify,
 };
 
-export default (format) => {
-  return renders[format];
-};
+export default (format) => renders[format];

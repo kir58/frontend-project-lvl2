@@ -13,7 +13,7 @@ const afterIni = path.join(__dirname, '__fixtures__/after.ini');
 
 const resultDefault = fs.readFileSync(path.join(__dirname, '__fixtures__/resultDefault.txt'), 'utf8');
 const resultPlain = fs.readFileSync(path.join(__dirname, '__fixtures__/resultPlain.txt'), 'utf8');
-const resultJSON = fs.readFileSync(path.join(__dirname, '__fixtures__/resultJSON.json'), 'utf8');
+const resultJSON = fs.readFileSync(path.join(__dirname, '__fixtures__/resultJson.json'), 'utf8');
 
 test('genDiff default format', () => {
   expect(genDiff(beforeJson, afterJson)).toBe(resultDefault);
