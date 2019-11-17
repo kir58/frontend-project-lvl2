@@ -15,6 +15,11 @@ gendiff file1.ini file2.ini:
 
 [![asciicast](https://asciinema.org/a/280345.png)](https://asciinema.org/a/280345)
 
+nested:
+  gendiff file1.json file2.json:
+
+[![asciicast](https://asciinema.org/a/281970.png)](https://asciinema.org/a/281970)
+
 gendiff --format plain file1.json file2.json:
 
 [![asciicast](https://asciinema.org/a/281934.png)](https://asciinema.org/a/281934)
