@@ -1,6 +1,6 @@
 import {
   OLD, NEW, UNCHAGE, UPDATE, NESTED,
-} from './constants';
+} from '../constants';
 
 const stringify = (obj, depth) => {
   if (!(obj instanceof Object)) {
@@ -10,7 +10,7 @@ const stringify = (obj, depth) => {
   const spaceAfter = ' '.repeat(depth * 4);
   const props = Object
     .keys(obj)
-    .map((key) => `${spaceBefore}${key}: ${stringify(obj[key])}\n`)
+    .map((key) => `${spaceBefore}${key}: ${stringify(obj[key], depth + 1)}\n`)
     .join(',');
   return `{\n${props}${spaceAfter}}`;
 };
