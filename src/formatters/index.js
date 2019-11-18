@@ -7,4 +7,10 @@ const renders = {
   json: JSON.stringify,
 };
 
-export default (format) => renders[format];
+export default (format) => {
+  const render = renders[format];
+  if (!render) {
+    throw new Error('invalid format');
+  }
+  return render;
+};

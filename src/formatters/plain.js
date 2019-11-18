@@ -1,5 +1,5 @@
 import {
-  OLD, NEW, UPDATE, NESTED,
+  OLD, NEW, UPDATED, NESTED,
 } from '../constants';
 
 const getFullpath = (path, node) => [...path, node].join('.');
@@ -9,7 +9,7 @@ const renderPlain = (ast, path = []) => ast.reduce((acc, node) => {
   if (node.type === NESTED) {
     return `${acc}${renderPlain(node.children, [...path, node.name])}`;
   }
-  if (node.type === UPDATE) {
+  if (node.type === UPDATED) {
     return `${acc}\nProperty '${getFullpath(path, node.name)}' was updated. From ${getValue(node.oldValue)} to ${getValue(node.newValue)}`;
   }
   if (node.type === OLD) {

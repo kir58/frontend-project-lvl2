@@ -1,5 +1,5 @@
 import {
-  OLD, NEW, UNCHAGE, UPDATE, NESTED,
+  OLD, NEW, UNCHAGE, UPDATED, NESTED,
 } from './constants';
 
 
@@ -21,7 +21,7 @@ const buildAst = (obj1, obj2) => {
       return [...acc, { value: newValue, type: NEW, name: key }];
     }
     return [...acc, {
-      type: UPDATE, oldValue, newValue, name: key,
+      type: UPDATED, oldValue, newValue, name: key,
     }];
   }, []);
 };

@@ -1,9 +1,9 @@
 const OLD = 'old';
 const NEW = 'new';
 const UNCHAGE = 'unchange';
-const UPDATE = 'uptdate';
+const UPDATED = 'updated';
 const NESTED = 'nested';
 
 export {
-  OLD, NEW, UNCHAGE, UPDATE, NESTED,
+  OLD, NEW, UNCHAGE, UPDATED, NESTED,
 };
