@@ -1,9 +1,9 @@
 const deleted = 'deleted';
 const added = 'added';
-const unchange = 'unchange';
+const unchanged = 'unchanged';
 const updated = 'updated';
 const nested = 'nested';
 
 export {
-  deleted, added, unchange, updated, nested,
+  deleted, added, unchanged, updated, nested,
 };

@@ -1,15 +1,15 @@
 import {
-  deleted, added, unchange, updated, nested,
+  deleted, added, unchanged, updated, nested,
 } from '../constants';
 
-const NUMBER_OF_SPACE = 4;
+const tabSize = 4;
 
 const stringify = (data, depth) => {
   if (!(data instanceof Object)) {
     return data;
   }
-  const tabStart = ' '.repeat((depth + 1) * NUMBER_OF_SPACE);
-  const tabEnd = ' '.repeat(depth * NUMBER_OF_SPACE);
+  const tabStart = ' '.repeat((depth + 1) * tabSize);
+  const tabEnd = ' '.repeat(depth * tabSize);
 
   const props = Object
     .keys(data)
@@ -19,15 +19,15 @@ const stringify = (data, depth) => {
 };
 
 const render = (ast, depth = 1) => {
-  const tab = ' '.repeat(depth * NUMBER_OF_SPACE);
-  const tabChangeNode = ' '.repeat(depth * NUMBER_OF_SPACE - 2);
-  const tabEnd = ' '.repeat((depth - 1) * NUMBER_OF_SPACE);
+  const tab = ' '.repeat(depth * tabSize);
+  const tabChangeNode = ' '.repeat(depth * tabSize - 2);
+  const tabEnd = ' '.repeat((depth - 1) * tabSize);
 
   const result = ast.reduce((acc, node) => {
     if (node.type === nested) {
       return `${acc}\n${tab}${node.name}: ${render(node.children, depth + 1)}`;
     }
-    if (node.type === unchange) {
+    if (node.type === unchanged) {
       return `${acc}\n${tab}${node.name}: ${stringify(node.value, depth)}`;
     }
     if (node.type === added) {
