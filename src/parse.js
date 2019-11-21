@@ -3,9 +3,9 @@ import { parse } from 'ini';
 
 
 const parsers = {
-  '.json': JSON.parse,
-  '.yaml': safeLoad,
-  '.ini': parse,
+  json: JSON.parse,
+  yaml: safeLoad,
+  ini: parse,
 };
 
 export default (format) => parsers[format];

@@ -1,27 +1,27 @@
 import {
-  OLD, NEW, UNCHAGE, UPDATED, NESTED,
+  deleted, added, unchange, updated, nested,
 } from './constants';
 
 
 const buildAst = (obj1, obj2) => {
   const allKeys = Object.keys({ ...obj1, ...obj2 });
   return allKeys.reduce((acc, key) => {
-    const oldValue = obj1[key];
-    const newValue = obj2[key];
-    if (newValue instanceof Object && oldValue instanceof Object) {
-      return [...acc, { children: buildAst(oldValue, newValue), name: key, type: NESTED }];
+    const deletedValue = obj1[key];
+    const addedValue = obj2[key];
+    if (addedValue instanceof Object && deletedValue instanceof Object) {
+      return [...acc, { children: buildAst(deletedValue, addedValue), name: key, type: nested }];
     }
-    if (newValue === oldValue) {
-      return [...acc, { value: newValue, type: UNCHAGE, name: key }];
+    if (addedValue === deletedValue) {
+      return [...acc, { value: addedValue, type: unchange, name: key }];
     }
-    if (newValue === undefined) {
-      return [...acc, { value: oldValue, type: OLD, name: key }];
+    if (addedValue === undefined) {
+      return [...acc, { value: deletedValue, type: deleted, name: key }];
     }
-    if (oldValue === undefined) {
-      return [...acc, { value: newValue, type: NEW, name: key }];
+    if (deletedValue === undefined) {
+      return [...acc, { value: addedValue, type: added, name: key }];
     }
     return [...acc, {
-      type: UPDATED, oldValue, newValue, name: key,
+      type: updated, deletedValue, addedValue, name: key,
     }];
   }, []);
 };

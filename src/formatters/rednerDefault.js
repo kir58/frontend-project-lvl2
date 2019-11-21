@@ -1,5 +1,5 @@
 import {
-  OLD, NEW, UNCHAGE, UPDATED, NESTED,
+  deleted, added, unchange, updated, nested,
 } from '../constants';
 
 const NUMBER_OF_SPACE = 4;
@@ -24,22 +24,22 @@ const render = (ast, depth = 1) => {
   const tabEnd = ' '.repeat((depth - 1) * NUMBER_OF_SPACE);
 
   const result = ast.reduce((acc, node) => {
-    if (node.type === NESTED) {
+    if (node.type === nested) {
       return `${acc}\n${tab}${node.name}: ${render(node.children, depth + 1)}`;
     }
-    if (node.type === UNCHAGE) {
+    if (node.type === unchange) {
       return `${acc}\n${tab}${node.name}: ${stringify(node.value, depth)}`;
     }
-    if (node.type === NEW) {
+    if (node.type === added) {
       return `${acc}\n${tabChangeNode}+ ${node.name}: ${stringify(node.value, depth)}`;
     }
-    if (node.type === OLD) {
+    if (node.type === deleted) {
       return `${acc}\n${tabChangeNode}- ${node.name}: ${stringify(node.value, depth)}`;
     }
-    if (node.type === UPDATED) {
-      const newValue = `\n${tabChangeNode}+ ${node.name}: ${stringify(node.newValue, depth)}`;
-      const oldValue = `\n${tabChangeNode}- ${node.name}: ${stringify(node.oldValue, depth)}`;
-      return `${acc}${oldValue}${newValue}`;
+    if (node.type === updated) {
+      const addedValue = `\n${tabChangeNode}+ ${node.name}: ${stringify(node.addedValue, depth)}`;
+      const deletedValue = `\n${tabChangeNode}- ${node.name}: ${stringify(node.deletedValue, depth)}`;
+      return `${acc}${deletedValue}${addedValue}`;
     }
     return acc;
   }, '{');

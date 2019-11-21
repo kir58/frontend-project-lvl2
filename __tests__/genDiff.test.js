@@ -1,19 +1,18 @@
 import fs from 'fs';
-import path from 'path';
+import buildFullPath from '../src/utils/buildFullPath';
 import genDiff from '../src';
 
-const beforeJson = path.join(__dirname, '__fixtures__/before.json');
-const afterJson = path.join(__dirname, '__fixtures__/after.json');
+const beforeJson = buildFullPath('before.json');
+const afterJson = buildFullPath('after.json');
 
-const beforeYaml = path.join(__dirname, '__fixtures__/before.yaml');
-const afterYaml = path.join(__dirname, '__fixtures__/after.yaml');
+const beforeYaml = buildFullPath('before.yaml');
+const afterYaml = buildFullPath('after.yaml');
 
-const beforeIni = path.join(__dirname, '__fixtures__/before.ini');
-const afterIni = path.join(__dirname, '__fixtures__/after.ini');
-
-const resultDefault = fs.readFileSync(path.join(__dirname, '__fixtures__/resultDefault.txt'), 'utf8');
-const resultPlain = fs.readFileSync(path.join(__dirname, '__fixtures__/resultPlain.txt'), 'utf8');
-const resultJSON = fs.readFileSync(path.join(__dirname, '__fixtures__/resultJson.json'), 'utf8');
+const beforeIni = buildFullPath('before.ini');
+const afterIni = buildFullPath('after.ini');
+const resultDefault = fs.readFileSync(buildFullPath('resultDefault.txt'), 'utf8');
+const resultPlain = fs.readFileSync(buildFullPath('resultPlain.txt'), 'utf8');
+const resultJSON = fs.readFileSync(buildFullPath('resultJson.json'), 'utf8');
 
 test('genDiff default format', () => {
   expect(genDiff(beforeJson, afterJson)).toBe(resultDefault);

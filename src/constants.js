@@ -1,9 +1,9 @@
-const OLD = 'old';
-const NEW = 'new';
-const UNCHAGE = 'unchange';
-const UPDATED = 'updated';
-const NESTED = 'nested';
+const deleted = 'deleted';
+const added = 'added';
+const unchange = 'unchange';
+const updated = 'updated';
+const nested = 'nested';
 
 export {
-  OLD, NEW, UNCHAGE, UPDATED, NESTED,
+  deleted, added, unchange, updated, nested,
 };
