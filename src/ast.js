@@ -1,29 +1,31 @@
+import _ from 'lodash';
+
 import {
   deleted, added, unchanged, updated, nested,
 } from './constants';
 
 
 const buildAst = (obj1, obj2) => {
-  const allKeys = Object.keys({ ...obj1, ...obj2 });
-  return allKeys.reduce((acc, key) => {
+  const allKeys = _.union(_.keys(obj1), _.keys(obj2));
+  return allKeys.map((key) => {
     const value1 = obj1[key];
     const value2 = obj2[key];
     if (value1 instanceof Object && value2 instanceof Object) {
-      return [...acc, { children: buildAst(value1, value2), name: key, type: nested }];
+      return { children: buildAst(value1, value2), name: key, type: nested };
     }
     if (value1 === value2) {
-      return [...acc, { value: value1, type: unchanged, name: key }];
+      return { value: value1, type: unchanged, name: key };
     }
     if (value2 === undefined) {
-      return [...acc, { value: value1, type: deleted, name: key }];
+      return { value: value1, type: deleted, name: key };
     }
     if (value1 === undefined) {
-      return [...acc, { value: value2, type: added, name: key }];
+      return { value: value2, type: added, name: key };
     }
-    return [...acc, {
+    return {
       type: updated, deletedValue: value1, addedValue: value2, name: key,
-    }];
-  }, []);
+    };
+  });
 };
 
 export default buildAst;

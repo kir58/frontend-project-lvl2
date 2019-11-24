@@ -1,8 +1,8 @@
-import rendnerDefault from './rednerDefault';
+import rendnerTxt from './txt';
 import renderPlain from './plain';
 
 const renders = {
-  txt: rendnerDefault,
+  txt: rendnerTxt,
   plain: renderPlain,
   json: JSON.stringify,
 };

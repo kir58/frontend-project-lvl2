@@ -1,24 +1,21 @@
 import {
-  deleted, added, updated, nested,
+  deleted, added, updated, nested, unchanged,
 } from '../constants';
 
 const getFullpath = (path, node) => [...path, node].join('.');
 const getValue = (value) => (value instanceof Object ? '\'[complex value]\'' : `'${value}'`);
 
-const renderPlain = (ast, path = []) => ast.reduce((acc, node) => {
-  if (node.type === nested) {
-    return `${acc}${renderPlain(node.children, [...path, node.name])}`;
-  }
-  if (node.type === updated) {
-    return `${acc}\nProperty '${getFullpath(path, node.name)}' was updated. From ${getValue(node.deletedValue)} to ${getValue(node.addedValue)}`;
-  }
-  if (node.type === deleted) {
-    return `${acc}\nProperty '${getFullpath(path, node.name)}' was removed`;
-  }
-  if (node.type === added) {
-    return `${acc}\nProperty '${getFullpath(path, node.name)}' was added with value: ${getValue(node.value)}`;
-  }
-  return acc;
-}, '');
+const renderPlain = (ast, path = []) => ast
+  .filter((node) => node.type !== unchanged)
+  .map((node) => {
+    const buildsNode = {
+      [nested]: (item) => renderPlain(item.children, [...path, item.name]),
+      [added]: (item) => `Property '${getFullpath(path, item.name)}' was added with value: ${getValue(item.value)}`,
+      [deleted]: (item) => `Property '${getFullpath(path, item.name)}' was removed`,
+      [updated]: (item) => `Property '${getFullpath(path, item.name)}' was updated. From ${getValue(item.deletedValue)} to ${getValue(item.addedValue)}`,
+    };
+    const buildNode = buildsNode[node.type];
+    return buildNode(node);
+  }).join('\n');
 
 export default renderPlain;

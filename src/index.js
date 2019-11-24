@@ -1,15 +1,20 @@
 import fs from 'fs';
 import getParser from './parse';
-import buildAst from './ast';
+import buildDiffAst from './ast';
 import getRender from './formatters';
 import getExtName from './utils/getExtName';
 
-const genDiff = (pathToFile1, pathToFile2, format = 'txt') => {
-  const extname1 = getExtName(pathToFile1);
-  const file1 = getParser(extname1)(fs.readFileSync(pathToFile1, 'utf8'));
-  const extname2 = getExtName(pathToFile2);
-  const file2 = getParser(extname2)(fs.readFileSync(pathToFile2, 'utf8'));
-  const ast = buildAst(file1, file2);
-  return getRender(format)(ast);
+const parseFile = (path) => {
+  const extname = getExtName(path);
+  const parse = getParser(extname);
+  const data = fs.readFileSync(path, 'utf8');
+  return parse(data);
+};
+
+const genDiff = (path1, path2, format = 'txt') => {
+  const obj1 = parseFile(path1);
+  const obj2 = parseFile(path2);
+  const diffAst = buildDiffAst(obj1, obj2);
+  return getRender(format)(diffAst);
 };
 export default genDiff;

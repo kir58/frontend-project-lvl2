@@ -10,10 +10,14 @@ const afterYaml = buildFixturePath('after.yaml');
 
 const beforeIni = buildFixturePath('before.ini');
 const afterIni = buildFixturePath('after.ini');
-const resultDefault = fs.readFileSync(buildFixturePath('resultDefault.txt'), 'utf8');
+
+let resultDefault;
+beforeEach(() => {
+  resultDefault = fs.readFileSync(buildFixturePath('resultDefault.txt'), 'utf8');
+});
+
 const resultPlain = fs.readFileSync(buildFixturePath('resultPlain.txt'), 'utf8');
 const resultJSON = fs.readFileSync(buildFixturePath('resultJson.json'), 'utf8');
-
 test('genDiff default format', () => {
   expect(genDiff(beforeJson, afterJson)).toBe(resultDefault);
   expect(genDiff(beforeYaml, afterYaml)).toBe(resultDefault);
