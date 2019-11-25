@@ -13,7 +13,7 @@ const afterIni = buildFixturePath('after.ini');
 
 let resultDefault;
 beforeEach(() => {
-  resultDefault = fs.readFileSync(buildFixturePath('resultDefault.txt'), 'utf8');
+  resultDefault = fs.readFileSync(buildFixturePath('resultTxt.txt'), 'utf8');
 });
 
 const resultPlain = fs.readFileSync(buildFixturePath('resultPlain.txt'), 'utf8');
