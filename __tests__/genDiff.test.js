@@ -1,6 +1,8 @@
 import fs from 'fs';
-import buildFixturePath from '../src/utils/buildFixturePath';
+import path from 'path';
 import genDiff from '../src';
+
+const buildFixturePath = (filePath) => path.join(process.cwd(), '__tests__', '__fixtures__', filePath);
 
 const beforeJson = buildFixturePath('before.json');
 const afterJson = buildFixturePath('after.json');
@@ -12,18 +14,22 @@ const beforeIni = buildFixturePath('before.ini');
 const afterIni = buildFixturePath('after.ini');
 
 let resultDefault;
-beforeEach(() => {
+let resultJson;
+let resultPlain;
+
+beforeAll(() => {
+  resultPlain = fs.readFileSync(buildFixturePath('resultPlain.txt'), 'utf8');
+  resultJson = fs.readFileSync(buildFixturePath('resultJson.json'), 'utf8');
   resultDefault = fs.readFileSync(buildFixturePath('resultTxt.txt'), 'utf8');
 });
 
-const resultPlain = fs.readFileSync(buildFixturePath('resultPlain.txt'), 'utf8');
-const resultJSON = fs.readFileSync(buildFixturePath('resultJson.json'), 'utf8');
+
 test('genDiff default format', () => {
   expect(genDiff(beforeJson, afterJson)).toBe(resultDefault);
   expect(genDiff(beforeYaml, afterYaml)).toBe(resultDefault);
   expect(genDiff(beforeIni, afterIni)).toBe(resultDefault);
 });
 test('genDiff inputs formats', () => {
-  expect(genDiff(beforeIni, afterIni, 'json')).toBe(resultJSON);
+  expect(genDiff(beforeIni, afterIni, 'json')).toBe(resultJson);
   expect(genDiff(beforeIni, afterIni, 'plain')).toBe(resultPlain);
 });

@@ -18,5 +18,5 @@ const renderPlain = (ast, path = []) => {
       const buildNode = buildsNode[node.type];
       return buildNode(node);
     }).join('\n');
-}
+};
 export default renderPlain;

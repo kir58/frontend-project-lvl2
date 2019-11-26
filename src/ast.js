@@ -16,10 +16,10 @@ const buildAst = (obj1, obj2) => {
     if (value1 === value2) {
       return { value: value1, type: unchanged, name: key };
     }
-    if (value2 === undefined) {
+    if (_.has(obj1, key) && !_.has(obj2, key)) {
       return { value: value1, type: deleted, name: key };
     }
-    if (value1 === undefined) {
+    if (!_.has(obj1, key) && _.has(obj2, key)) {
       return { value: value2, type: added, name: key };
     }
     return {

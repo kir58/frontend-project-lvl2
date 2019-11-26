@@ -10,7 +10,7 @@ const renders = {
 export default (format) => {
   const render = renders[format];
   if (!render) {
-    throw new Error('invalid format');
+    throw new Error(`${format} is invalid format`);
   }
   return render;
 };

@@ -5,16 +5,16 @@ import {
 const buildTab = (count) => `${'  '.repeat(count * 2)}`;
 
 const stringify = (data, depth) => {
-  if (data instanceof Object) {
-    const tabStart = buildTab(depth + 2);
-    const tabEnd = buildTab(depth + 1);
-    const props = Object
-      .keys(data)
-      .map((key) => `${tabStart}${key}: ${stringify(data[key], depth + 1)}`)
-      .join(', ');
-    return `{\n${props}\n${tabEnd}}`;
+  if (!(data instanceof Object)) {
+    return data;
   }
-  return data;
+  const tabStart = buildTab(depth + 2);
+  const tabEnd = buildTab(depth + 1);
+  const props = Object
+    .keys(data)
+    .map((key) => `${tabStart}${key}: ${stringify(data[key], depth + 1)}`)
+    .join(', ');
+  return `{\n${props}\n${tabEnd}}`;
 };
 
 const render = (ast, depth = 0) => {
